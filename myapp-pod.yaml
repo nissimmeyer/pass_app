@@ -1,0 +1,116 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2024-07-14T08:04:22Z"
+  generateName: myapp-cd45f9dc5-
+  labels:
+    app: myapp
+    pod-template-hash: cd45f9dc5
+  name: myapp-cd45f9dc5-hmrw2
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: myapp-cd45f9dc5
+    uid: 9e2b0717-06ab-4ef1-b19a-faf862b3c830
+  resourceVersion: "5451"
+  uid: 36e4079e-28dd-4ec4-ae6b-28a69d7ef7f4
+spec:
+  containers:
+  - image: nissim2305/myapp-pass:latest
+    imagePullPolicy: Always
+    name: myapp
+    ports:
+    - containerPort: 80
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-mhk2m
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-mhk2m
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-07-14T08:04:32Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-07-14T08:04:22Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-07-14T08:04:32Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-07-14T08:04:32Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-07-14T08:04:22Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://13634f7ed66b5ea91fbd5cb26333ceff621062ceb1ae97aa2c39c12424c045f5
+    image: nissim2305/myapp-pass:latest
+    imageID: docker-pullable://nissim2305/myapp-pass@sha256:05f01ef5223bc97b73c251b9c7307cd931b6915c4112ac88aec4feea0a774059
+    lastState: {}
+    name: myapp
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-07-14T08:04:31Z"
+  hostIP: 192.168.49.2
+  hostIPs:
+  - ip: 192.168.49.2
+  phase: Running
+  podIP: 10.244.0.46
+  podIPs:
+  - ip: 10.244.0.46
+  qosClass: BestEffort
+  startTime: "2024-07-14T08:04:22Z"
